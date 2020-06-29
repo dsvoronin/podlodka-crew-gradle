@@ -3,6 +3,16 @@ plugins {
     id("kotlin-android")
 }
 
+//android {
+//    setCompileSdkVersion(30)
+//    buildToolsVersion = "30.0.0"
+//
+//    defaultConfig {
+//        minSdkVersion(16)
+//        targetSdkVersion(30)
+//    }
+//}
+
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
     implementation("androidx.appcompat:appcompat:1.1.0")

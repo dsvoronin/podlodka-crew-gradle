@@ -3,6 +3,10 @@ import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.LibraryPlugin
+import com.android.build.gradle.internal.tasks.PackageRenderscriptTask
+import com.android.build.gradle.tasks.AidlCompile
+import com.android.build.gradle.tasks.RenderscriptCompile
+import com.android.build.gradle.tasks.ShaderCompile
 import org.gradle.api.tasks.wrapper.Wrapper.DistributionType.ALL
 
 buildscript {
@@ -21,10 +25,21 @@ buildscript {
 }
 
 allprojects {
-    repositories {
 
-        google()
+    @Suppress("UnstableApiUsage")
+    repositories {
         jcenter()
+
+        exclusiveContent {
+            forRepository {
+                google()
+            }
+            filter {
+                includeGroupByRegex("androidx\\..+")
+                includeGroupByRegex("com.android.*")
+                includeGroupByRegex("com.google.android.+")
+            }
+        }
     }
 }
 
@@ -44,6 +59,16 @@ subprojects {
                 targetSdkVersion(30)
             }
         }
+
+        // todo 4.0 AGP умеет сам
+        tasks.matching {
+            it is AidlCompile
+                    || it is ShaderCompile
+                    || it is PackageRenderscriptTask
+                    || it is RenderscriptCompile
+        }.whenTaskAdded {
+            enabled = false
+        }
     }
 
     plugins.withType<AppPlugin> {
@@ -62,6 +87,13 @@ subprojects {
             variantFilter {
                 if (name == "debug") {
                     setIgnore(true)
+                }
+            }
+
+            libraryVariants.all {
+                // TODO: replace with https://issuetracker.google.com/issues/72050365 once released (4.0+)
+                generateBuildConfigProvider?.configure {
+                    enabled = false
                 }
             }
         }

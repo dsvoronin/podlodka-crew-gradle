@@ -5,10 +5,16 @@ plugins {
 }
 
 android {
+//    setCompileSdkVersion(30)
+//    buildToolsVersion = "30.0.0"
+
     defaultConfig {
         applicationId = "com.example.myapplication"
         versionCode = 1
         versionName = "1.0"
+
+//        minSdkVersion(16)
+//        targetSdkVersion(30)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,11 +38,15 @@ android {
     }
 }
 
+//apply(from = "$projectDir/dependencies.gradle")
+
 dependencies {
     implementation(project(":mylibrary"))
     implementation(project(":mylibrary2"))
+
     implementation(library("kotlinStdLib"))
-    implementation(Deps.jetpack.appcompat)
+
+    implementation(Deps.jetpack.appCompat)
     implementation(Deps.jetpack.coreCtx)
     implementation(Deps.jetpack.material)
     implementation(Deps.jetpack.constraint)

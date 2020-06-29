@@ -6,7 +6,7 @@ object Deps {
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:1.3.72"
 
     object jetpack {
-        const val appcompat = "androidx.appcompat:appcompat:1.1.0"
+        const val appCompat = "androidx.appcompat:appcompat:1.1.0"
         const val coreCtx = "androidx.core:core-ktx:1.3.0"
         const val material = "com.google.android.material:material:1.1.0"
         const val constraint = "androidx.constraintlayout:constraintlayout:1.1.3"
@@ -30,6 +30,7 @@ fun library(key: String): String {
         "appcompat" -> "androidx.appcompat:appcompat:1.1.0"
         "material" -> "com.google.android.material:material:1.1.0"
         "constraint" -> "androidx.constraintlayout:constraintlayout:1.1.3"
+
         else -> error("Unregistered library key: $key, check buildSrc/Deps.kt")
     }
 }
