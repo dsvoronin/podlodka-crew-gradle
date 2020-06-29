@@ -1,0 +1,2 @@
+
+- pinning dependencies to repositories
