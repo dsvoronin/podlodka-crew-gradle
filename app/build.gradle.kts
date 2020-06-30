@@ -5,16 +5,16 @@ plugins {
 }
 
 android {
-//    setCompileSdkVersion(30)
-//    buildToolsVersion = "30.0.0"
+    setCompileSdkVersion(30)
+    buildToolsVersion = "30.0.0"
 
     defaultConfig {
         applicationId = "com.example.myapplication"
         versionCode = 1
         versionName = "1.0"
 
-//        minSdkVersion(16)
-//        targetSdkVersion(30)
+        minSdkVersion(16)
+        targetSdkVersion(30)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

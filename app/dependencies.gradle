@@ -1,0 +1,18 @@
+dependencies {
+    implementation(project(":mylibrary"))
+    implementation(project(":mylibrary2"))
+
+    implementation(Libs.kotlinStdLib)
+
+    implementation(Libs.jetpack.appCompat)
+    implementation(Libs.jetpack.coreCtx)
+    implementation(Libs.jetpack.material)
+    implementation(Libs.jetpack.constraint)
+    implementation(Libs.jetpack.navigationFragment)
+    implementation(Libs.jetpack.navigationUi)
+
+    testImplementation(Libs.test.junit)
+
+    androidTestImplementation(Libs.androidTest.junit)
+    androidTestImplementation(Libs.androidTest.espresso)
+}
