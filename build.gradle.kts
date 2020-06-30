@@ -1,5 +1,6 @@
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.AppPlugin
+import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.LibraryPlugin
 import com.android.build.gradle.internal.tasks.PackageRenderscriptTask
@@ -57,7 +58,8 @@ buildChecks {
     }
 
     /**
-     * On macOs java.net.InetAddress#getLocalHost() invocation can last up to 5 seconds instead of milliseconds (thoeni.io/post/macos-sierra-java).
+     * On macOs java.net.InetAddress#getLocalHost()
+     * invocation can last up to 5 seconds instead of milliseconds (thoeni.io/post/macos-sierra-java).
      */
     macOSLocalhost { }
 
@@ -106,26 +108,14 @@ allprojects {
 subprojects {
 
     plugins.matching { it is AppPlugin || it is LibraryPlugin }.whenPluginAdded {
+        configure<BaseExtension> {
+            setCompileSdkVersion(30)
+            buildToolsVersion = "30.0.0"
 
-//        configure<BaseExtension> {
-//
-//            setCompileSdkVersion(30)
-//            buildToolsVersion = "30.0.0"
-//
-//            defaultConfig {
-//                minSdkVersion(16)
-//                targetSdkVersion(30)
-//            }
-//        }
-
-        // todo 4.0 AGP умеет сам
-        tasks.matching {
-            it is AidlCompile
-                    || it is ShaderCompile
-                    || it is PackageRenderscriptTask
-                    || it is RenderscriptCompile
-        }.whenTaskAdded {
-            enabled = false
+            defaultConfig {
+                minSdkVersion(16)
+                targetSdkVersion(30)
+            }
         }
     }
 
